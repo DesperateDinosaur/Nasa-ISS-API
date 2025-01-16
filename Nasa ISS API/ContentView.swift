@@ -10,52 +10,47 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.openWindow) private var openWindow
     @Query private var items: [Item]
+    
     private var pages: [Page] = [
-        Page(pageID: PageIDs.all, title: "All", icon: "questionmark.circle"),
-        Page(pageID: PageIDs.climate, title: "Climate and Tanks", icon: "thermometer.medium"),
-        Page(pageID: PageIDs.usAttitude, title: "US Attitude", icon: "angle"),
-        Page(pageID: PageIDs.cmg, title: "Control Moment Gyroscope", icon: "gyroscope"),
-        Page(pageID: PageIDs.bands, title: "Bands", icon: "antenna.radiowaves.left.and.right")
+        Page(pageID: PageIDs.all, title: "All", icon: Image(systemName: "questionmark.circle")),
+        Page(pageID: PageIDs.climate, title: "Climate and Tanks", icon: Image(systemName: "thermometer.medium")),
+        Page(pageID: PageIDs.usAttitude, title: "US Attitude", icon: Image("custom.angle")),
+        Page(pageID: PageIDs.cmg, title: "Control Moment Gyroscope", icon: Image("custom.gyroscope")),
+        Page(pageID: PageIDs.bands, title: "Bands", icon: Image(systemName: "antenna.radiowaves.left.and.right"))
     ]
 
     var body: some View {
         NavigationSplitView {
             List {
-//                ForEach(items) { item in
-//                    NavigationLink {
-//                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-//                    } label: {
-//                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-//                    }
-//                }
-//                .onDelete(perform: deleteItems)
-                
                 ForEach(pages) { page in
                     NavigationLink {
                         Text("This is a page for " + page.title + " data!")
                     } label: {
-                        Image(systemName: page.icon).symbolRenderingMode(.palette)
-                            .foregroundStyle(.primary, Color.accentColor)
+                        HStack(alignment: .center){
+                            page.icon.symbolRenderingMode(.palette)
+                                .foregroundStyle(.primary, Color.accentColor)
+                        }.frame(maxWidth: 10)
                         Text(page.title)
                     }
                 }
             }
-            .navigationSplitViewColumnWidth(min: 200, ideal: 200)
+            .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 200)
             .toolbar {
                 ToolbarItem {
                     Button(action: appInfo) {
-                        Label("Add Item", systemImage: "questionmark.circle")
+                        Label("About", systemImage: "questionmark.circle")
                     }
                 }
             }
         } detail: {
-            Text("Select an item")
+            Image(systemName: "playstation.logo")
         }
     }
     
     private func appInfo() {
-        
+        openWindow(id: "about")
     }
 
     private func addItem() {

@@ -26,7 +26,14 @@ struct Nasa_ISS_APIApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+        }.commands {
+            CommandGroup(replacing: CommandGroupPlacement.newItem) {
+            }
         }
         .modelContainer(sharedModelContainer)
+        
+        Window("About", id: "about") {
+            Text("Made by Gabriel Internoscia")
+        }
     }
 }
