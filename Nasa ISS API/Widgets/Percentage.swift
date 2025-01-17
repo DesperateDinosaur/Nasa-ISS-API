@@ -13,11 +13,12 @@ struct Percentage: View {
 //        RoundedRectangle(cornerRadius: 25)
 //            .fill(.regularMaterial)
 //            .frame(width: 150, height: 150)
-        VStack{
+        VStack {
             Text("Hello")
         }
-        .frame(width: 125, height: 125)
-        .background(.regularMaterial)
-        .clipShape(.rect(cornerSize: CGSize(width: 25, height: 25)))
+        .frame(width: 145, height: 145)
+//        .background(.regularMaterial)
+        .background(Color.red)
+        .clipShape(.rect(cornerSize: CGSize(width: 10, height: 10)))
     }
 }

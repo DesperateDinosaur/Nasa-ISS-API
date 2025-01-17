@@ -10,6 +10,10 @@ import SwiftUI
 
 public struct USAttitude: View {
     public var body: some View {
-        Text("Hello")
+        VStack {
+            
+        }
+        .frame(maxWidth: .infinity)
+        .padding()
     }
 }

@@ -33,8 +33,7 @@ struct ContentView: View {
             List {
                 ForEach(pages) { page in
                     NavigationLink {
-                        Text("This is a page for " + page.title + " data!")
-                        ScrollView{
+                        ScrollView {
                             switch page.pageID {
                             case PageIDs.all:
                                 All()
@@ -50,6 +49,8 @@ struct ContentView: View {
                                 Startup()
                             }
                         }
+                        .frame(alignment: .leading)
+                        .navigationTitle(page.title)
                     } label: {
                         page.icon.symbolRenderingMode(.palette)
                             .foregroundStyle(.primary, Color.accentColor)

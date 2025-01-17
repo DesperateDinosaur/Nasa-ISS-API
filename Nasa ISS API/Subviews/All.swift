@@ -10,14 +10,18 @@ import SwiftUI
 
 struct All: View {
     var body: some View {
-        VStack{
+        VStack {
             Climate()
             Spacer()
+                .frame(height: 75)
             USAttitude()
             Spacer()
+                .frame(height: 75)
             CMG()
             Spacer()
+                .frame(height: 75)
             Bands()
         }
+        .frame(maxWidth: .infinity)
     }
 }
