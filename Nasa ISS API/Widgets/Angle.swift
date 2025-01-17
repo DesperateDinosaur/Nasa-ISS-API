@@ -16,8 +16,8 @@ struct Angle: View {
         VStack{
             Text("Hello")
         }
+        .frame(width: 125, height: 125)
         .background(.regularMaterial)
-        .frame(width: 150, height: 150)
         .clipShape(.rect(cornerSize: CGSize(width: 25, height: 25)))
     }
 }

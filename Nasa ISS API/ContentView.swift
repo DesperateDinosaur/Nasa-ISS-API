@@ -34,19 +34,21 @@ struct ContentView: View {
                 ForEach(pages) { page in
                     NavigationLink {
                         Text("This is a page for " + page.title + " data!")
-                        switch page.pageID {
-                        case PageIDs.all:
-                            All()
-                        case PageIDs.climate:
-                            Climate()
-                        case PageIDs.usAttitude:
-                            USAttitude()
-                        case PageIDs.cmg:
-                            CMG()
-                        case PageIDs.bands:
-                            Bands()
-                        default:
-                            Startup()
+                        ScrollView{
+                            switch page.pageID {
+                            case PageIDs.all:
+                                All()
+                            case PageIDs.climate:
+                                Climate()
+                            case PageIDs.usAttitude:
+                                USAttitude()
+                            case PageIDs.cmg:
+                                CMG()
+                            case PageIDs.bands:
+                                Bands()
+                            default:
+                                Startup()
+                            }
                         }
                     } label: {
                         page.icon.symbolRenderingMode(.palette)
@@ -69,8 +71,7 @@ struct ContentView: View {
                 }
             }
         } detail: {
-            Image(systemName: "playstation.logo")
-                .font(.system(size: 100))
+            Startup()
         }
         .onAppear {
             adjustSidebar()
