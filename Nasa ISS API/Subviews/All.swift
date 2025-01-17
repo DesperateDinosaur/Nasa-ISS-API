@@ -10,6 +10,14 @@ import SwiftUI
 
 struct All: View {
     var body: some View {
-        Temperature()
+        VStack{
+            Climate()
+            Spacer()
+            USAttitude()
+            Spacer()
+            CMG()
+            Spacer()
+            Bands()
+        }
     }
 }

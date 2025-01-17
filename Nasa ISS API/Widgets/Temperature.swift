@@ -10,6 +10,14 @@ import SwiftUI
 
 struct Temperature: View {
     var body: some View {
-        Text("hello")
+//        RoundedRectangle(cornerRadius: 25)
+//            .fill(.regularMaterial)
+//            .frame(width: 150, height: 150)
+        VStack{
+            Text("Hello")
+        }
+        .frame(width: 150, height: 150)
+        .background(Color.red)
+        .clipShape(.rect(cornerSize: CGSize(width: 25, height: 25)))
     }
 }
