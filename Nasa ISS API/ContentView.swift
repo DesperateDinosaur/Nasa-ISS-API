@@ -11,6 +11,9 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.openWindow) private var openWindow
+    @Environment(\.sidebarRowSize) private var sidebarRowSize
+    
+    @State private var sidebarSize: CGFloat = 250
     @Query private var items: [Item]
     
     private var pages: [Page] = [
@@ -20,6 +23,10 @@ struct ContentView: View {
         Page(pageID: PageIDs.cmg, title: "Control Moment Gyroscope", icon: Image("custom.gyroscope")),
         Page(pageID: PageIDs.bands, title: "Bands", icon: Image(systemName: "antenna.radiowaves.left.and.right"))
     ]
+    
+    init() {
+        print("initializing")
+    }
 
     var body: some View {
         NavigationSplitView {
@@ -27,16 +34,33 @@ struct ContentView: View {
                 ForEach(pages) { page in
                     NavigationLink {
                         Text("This is a page for " + page.title + " data!")
+                        switch page.pageID {
+                        case PageIDs.all:
+                            All()
+                        case PageIDs.climate:
+                            Climate()
+                        case PageIDs.usAttitude:
+                            USAttitude()
+                        case PageIDs.cmg:
+                            CMG()
+                        case PageIDs.bands:
+                            Bands()
+                        default:
+                            Startup()
+                        }
                     } label: {
-                        HStack(alignment: .center){
-                            page.icon.symbolRenderingMode(.palette)
-                                .foregroundStyle(.primary, Color.accentColor)
-                        }.frame(maxWidth: 10)
+                        page.icon.symbolRenderingMode(.palette)
+                            .foregroundStyle(.primary, Color.accentColor)
+                            .frame(maxWidth: 18)
+                            .font(.system(size: 18))
                         Text(page.title)
                     }
                 }
             }
-            .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 200)
+            .navigationSplitViewColumnWidth(min: sidebarSize, ideal: sidebarSize, max: sidebarSize)
+            .onChange(of: sidebarRowSize, {
+                adjustSidebar()
+            })
             .toolbar {
                 ToolbarItem {
                     Button(action: appInfo) {
@@ -46,11 +70,30 @@ struct ContentView: View {
             }
         } detail: {
             Image(systemName: "playstation.logo")
+                .font(.system(size: 100))
+        }
+        .onAppear {
+            adjustSidebar()
         }
     }
     
     private func appInfo() {
-        openWindow(id: "about")
+        withAnimation {
+            openWindow(id: "about")
+        }
+    }
+    
+    private func adjustSidebar() {
+                switch sidebarRowSize {
+                case SidebarRowSize.small:
+                    sidebarSize = 205
+                case SidebarRowSize.medium:
+                    sidebarSize = 225
+                case SidebarRowSize.large:
+                    sidebarSize = 250
+                default:
+                    sidebarSize = 250
+                }
     }
 
     private func addItem() {
