@@ -9,43 +9,50 @@ import Foundation
 import SwiftUI
 
 public struct Climate: View {
+    
+    private var node2_temps = [53.3, 43.5]
+    private var node3_temps = [22.9, 35.6]
+    private var tank_percents = [45.0, 55.1, 82.7]
+    
     public var body: some View {
         VStack (alignment: .leading){
             Text("Cooling Fluid Temp (Node 2) [°C]")
                 .font(.title2)
-            Grid{
-                GridRow{
-                    Temperature()
+            
+            FlowLayout{
+                ForEach(0..<node2_temps.count, id: \.self) { temp in
+                    Temperature(temp: Double(temp))
                     Spacer()
                         .frame(width: 15)
-                    Temperature()
                 }
             }
+            
             Spacer()
                 .frame(height: 50)
+            
             Text("Cooling Fluid Temp (Node 3) [°C]")
                 .font(.title2)
-            Grid{
-                GridRow{
-                    Temperature()
+            
+            FlowLayout{
+                ForEach(0..<node3_temps.count, id: \.self) { temp in
+                    Temperature(temp: Double(temp))
                     Spacer()
                         .frame(width: 15)
-                    Temperature()
                 }
             }
+            
             Spacer()
                 .frame(height: 50)
+            
             Text("Tanks")
                 .font(.title2)
-            Grid{
-                GridRow{
-                    Percentage()
-                    Spacer()
-                        .frame(width: 15)
-                    Percentage()
-                    Spacer()
-                        .frame(width: 15)
-                    Percentage()
+            
+            FlowLayout{
+                ForEach(0..<tank_percents.count, id: \.self) { percent in
+                    Percentage(percent: Double(percent))
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 15, trailing: 15))
+//                    Spacer()
+//                        .frame(width: 15)
                 }
             }
         }

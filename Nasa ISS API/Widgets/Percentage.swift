@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 struct Percentage: View {
+    var percent: Double
+    
     var body: some View {
 //        RoundedRectangle(cornerRadius: 25)
 //            .fill(.regularMaterial)

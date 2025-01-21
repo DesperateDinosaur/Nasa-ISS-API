@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 struct Temperature: View {
+    var temp: Double
+    
     var body: some View {
 //        RoundedRectangle(cornerRadius: 25)
 //            .fill(.regularMaterial)
