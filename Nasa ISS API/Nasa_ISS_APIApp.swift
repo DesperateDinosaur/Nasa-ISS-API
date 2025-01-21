@@ -26,6 +26,7 @@ struct Nasa_ISS_APIApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .frame(minWidth: 620, maxWidth: .infinity, minHeight: 225, maxHeight: .infinity)
         }.commands {
             CommandGroup(replacing: CommandGroupPlacement.newItem) {
             }
