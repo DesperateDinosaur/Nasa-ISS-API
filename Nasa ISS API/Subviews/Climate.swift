@@ -48,12 +48,18 @@ public struct Climate: View {
                 .font(.title2)
             
             FlowLayout{
-                ForEach(0..<tank_percents.count, id: \.self) { percent in
-                    Percentage(percent: Double(percent))
+                ForEach(tank_percents, id: \.self) { percent in
+                    Percentage(percent: percent)
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 15, trailing: 15))
-//                    Spacer()
-//                        .frame(width: 15)
                 }
+//                for percent in tank_percents {
+//                    Percentage(percent: percent)
+//                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 15, trailing: 15))
+//                }
+//                tank_percents.forEach { percent in
+//                    Percentage(percent: percent)
+//                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 15, trailing: 15))
+//                }
             }
         }
         .frame(maxWidth: .infinity)
